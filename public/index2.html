@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Siswa</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #343a40;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+        .form-control {
+            border-radius: 4px;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .link-login {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .link-login:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4 text-center">Daftar Siswa Baru</h1>
+        <form action="register_process.php" method="POST">
+            <div class="form-group mb-3">
+                <label for="name">Nama:</label>
+                <input type="text" id="name" name="name" class="form-control" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" class="form-control" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="address">Alamat:</label>
+                <textarea id="address" name="address" class="form-control" rows="3" required></textarea>
+            </div>
+            <div class="form-group mb-3">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" class="form-control" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="phone">Nomor HP:</label>
+                <input type="tel" id="phone" name="phone" class="form-control" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary mb-3">Daftar</button>
+        </form>
+        <p class="text-center">Sudah punya akun? <a href="login.html" class="link-login">Kembali ke halaman login</a></p>
+    </div>
+</body>
+</html>
