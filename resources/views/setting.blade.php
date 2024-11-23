@@ -2,14 +2,10 @@
 
 @section('title', 'Dashboard - Siswa Perpustakaan')
 
-@section('header')
-    @include('template.navbar_siswa')
-@endsection
-
 @section('main')
 
 <div id="layoutSidenav">
-    @include('template.sidebar_siswa')
+    @include('template.sidebar')
     <div id="layoutSidenav_content">
         <main>
             <div class="container mt-5">

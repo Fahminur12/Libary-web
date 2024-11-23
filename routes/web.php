@@ -39,7 +39,7 @@ Route::get('/register', [PagesController::class, 'registerPage'])->name('registe
 Route::post('/register', [UsersController::class, 'register'])->name('user.register');
 
 
-
+Route::redirect('/', '/login');
 
 
 
@@ -108,7 +108,10 @@ Route::prefix('rak')->group(function () {
 Route::prefix('peminjaman')->group(function () {
     Route::get('/', [PeminjamanController::class, 'admin'])->name('admin.peminjaman');
     Route::post('/admin/{id}/update-status', [PeminjamanController::class, 'updateStatus'])->name('admin.peminjaman.update-status');
-    Route::get('/admin/{id}/create', [PeminjamanController::class, 'create'])->name('admin.peminjaman.create');
+    Route::get('/admin/{id}/update-status', [PeminjamanController::class, 'create'])->name('admin.peminjaman.create');
+    Route::get('/admin/create', [PeminjamanController::class, 'createSiswa'])->name('peminjaman.createSiswa');
+    Route::post('/create/store', [PeminjamanController::class, 'store'])->name(name: 'peminjaman.store');
+    Route::delete('/{id}', [PeminjamanController::class, 'delete'])->name('peminjaman.delete');
 });
 
 });
@@ -117,13 +120,12 @@ Route::middleware(['auth', RoleMiddleware::class.':anggota'])->group(function ()
 
     Route::get('/dashboardsiswa', [PagesController::class, 'dashboardSiswa'])->name('dashboardSiswa');
     Route::get('/bukusiswa', [BukuController::class, 'siswa'])->name('bukuSiswa');
+    Route::get('/buku/pinjam/{buku_id}', [PeminjamanController::class, 'pinjam'])->name('buku.pinjam');
     Route::get('/setting', [PagesController::class, 'pengaturan'])->name('pengaturan');
     Route::patch('user/{id}/update_profile', [UsersController::class, 'upload_profile'])->name('action.upload_profile');
 
     Route::prefix('peminjamansiswa')->group(function () {
         Route::get('/', [PeminjamanController::class, 'show'])->name('peminjaman_siswa');
-        Route::get('/siswa/create', [PeminjamanController::class, 'createSiswa'])->name('peminjaman.createSiswa');
-        Route::post('/siswa/store', [PeminjamanController::class, 'store'])->name('peminjaman.store');
     });
 });
 
@@ -138,7 +140,17 @@ Route::middleware(['auth', RoleMiddleware::class.':anggota'])->group(function ()
     //     return view('welcome');
 // });
 
+Route::get('/login1', function () {
+    return view('public.login1');
+});
 
+Route::get('/register1', function () {
+    return view('public.register1');
+});
+
+Route::get('/sidebar', function () {
+    return view('template.sidebar');
+});
 // Route::match(['get', 'post'], '/anggota', function () {
 // 	return 'Hallo, aku membuat route anggota dengan beberapa method';
 // });

@@ -74,12 +74,13 @@ public function login(Request $request)
     }
 }
 
-public function upload_profile (Request $request, $id)
+public function upload_profile(Request $request, $id)
 {
     if ($request->hasFile('profile')) {
         $data = $request->file('profile');
+        $path = $data->store('profile_pictures', 'public'); // Menyimpan gambar ke folder 'public/profile_pictures'
 
-        User::upload_profile($id, $data);
+        User::where('user_id', $id)->update(['user_pict_url' => $path]);
 
         return redirect()->route('pengaturan')->with('success', 'Foto profil berhasil diperbarui!');
     }
@@ -91,8 +92,9 @@ public function upload_profile_admin (Request $request, $id)
 {
     if ($request->hasFile('profile')) {
         $data = $request->file('profile');
+        $path = $data->store('profile_pictures', 'public');
 
-        User::upload_profile($id, $data);
+        User::where('user_id', $id)->update(['user_pict_url' => $path]);
 
         return redirect()->route('pengaturanadmin')->with('success', 'Foto profil berhasil diperbarui!');
     }

@@ -9,9 +9,9 @@
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
     <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/custom-styles.css') }}" rel="stylesheet" />
-
+    @vite('resources/css/app.css')
 </head>
-<body>
+<body class="bg-[#f7f9fb]">
     <header>
         @yield('header')
     </header>

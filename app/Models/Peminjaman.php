@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Peminjaman extends Model
 {
@@ -36,5 +37,12 @@ class Peminjaman extends Model
     {
         return $this->hasManyThrough(Buku::class, PeminjamanDetail::class, 'peminjaman_detail_peminjaman_id', 'buku_id', 'peminjaman_id', 'peminjaman_detail_buku_id');
     }
+
+    public static function deletePeminjaman($id)
+    {
+        $peminjaman = self::findOrFail($id);
+        $peminjaman->delete();
+    }
+
 
 }

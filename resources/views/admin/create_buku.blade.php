@@ -2,21 +2,23 @@
 
 @section('title', 'Dashboard - Admin Perpustakaan')
 
-@section('header')
-    @include('template.navbar_admin')
-@endsection
-
 @section('main')
 
 <div id="layoutSidenav">
-    @include('template.sidebar_admin')
+    <aside class="w-64 bg-white border-r h-screen overflow-hidden flex-shrink-0">
+        @include('template.sidebarAdmin')
+    </aside>
 <div id="layoutSidenav_content">
     <main>
+        <div class="border-b">
+            <div class="px-4">
+                <h1 class="mt-[10px] poppins-bold text-2xl">Tambah Buku</h1>
+                <ol class="mb-[7px]">
+                    <li class="poppins-medium text-gray-400">Halaman Untuk Tambah Buku</li>
+                </ol>
+            </div>
+        </div>
         <div class="container-fluid px-4">
-            <h1 class="mt-4">Tambah Buku</h1>
-            <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item active">Halaman Tambah Data Buku</li>
-            </ol>
             <form action="{{ route('action.createbuku') }}" class="row my-4 gap-3" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row gap-3">

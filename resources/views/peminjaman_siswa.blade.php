@@ -2,49 +2,62 @@
 
 @section('title', 'Dashboard - Siswa Perpustakaan')
 
-@section('header')
-    @include('template.navbar_siswa')
-@endsection
-
 @section('main')
 
 <div id="layoutSidenav">
-    @include('template.sidebar_siswa')
+    <aside class="w-64 bg-white border-r h-screen overflow-hidden flex-shrink-0">
+        @include('template.sidebar')
+    </aside>
     <div id="layoutSidenav_content">
         <main>
+            <div class="px-4 border-b">
+                <h1 class="mt-[10px] poppins-bold text-2xl">Peminjaman</h1>
+                <ol class="mb-[7px]">
+                    <li class="poppins-medium text-gray-400">Halaman Untuk Peminjaman</li>
+                </ol>
+            </div>
             <div class="container mt-5">
-                <h1 class="mb-4">Daftar Peminjaman Buku</h1>
-                <a href="{{ route('peminjaman.createSiswa') }}" class="btn btn-primary mb-3" type="submit" >Pinjam</a>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nama Peminjam</th>
-                            <th>Judul Buku</th>
-                            <th>Tanggal Pinjam</th>
-                            <th>Tanggal Kembali</th>
-                            <th>Status</th>
-                            <th>Denda</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($peminjaman as $item)
+                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                    <table class="w-full text-sm text-left text-gray-500">
+                        <thead class="text-xs text-white bg-[#141313] uppercase font-medium">
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $item->user->user_nama }}</td>
-                                <td>
-                                    @foreach($item->peminjamanDetail as $detail)
-                                        {{ $detail->buku->buku_judul ?? 'Tidak Diketahui' }}<br>
-                                    @endforeach
-                                </td>
-                                <td>{{ $item->peminjaman_tglpinjam }}</td>
-                                <td>{{ $item->peminjaman_tglkembali }}</td>
-                                <td class=" {{ $item->peminjaman_statuskembali ? 'bg-success' : 'bg-warning' }}">{{ $item->peminjaman_statuskembali ? 'Selesai' : 'Dipinjam' }}</td>
-                                <td>{{ $item->peminjaman_denda ? 'Rp ' . number_format($item->peminjaman_denda, 2) : '-' }}</td>
+                                <th scope="col" class="px-3 py-3 whitespace-nowrap">No</th>
+                                <th scope="col" class="px-3 py-3 whitespace-nowrap">Nama Peminjam</th>
+                                <th scope="col" class="px-3 py-3 whitespace-nowrap">Judul Buku</th>
+                                <th scope="col" class="px-3 py-3 whitespace-nowrap">Tanggal Pinjam</th>
+                                <th scope="col" class="px-3 py-3 whitespace-nowrap">Tanggal Kembali</th>
+                                <th scope="col" class="px-3 py-3 whitespace-nowrap">Status</th>
+                                <th scope="col" class="px-3 py-3 whitespace-nowrap">Denda</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach ($peminjaman as $item)
+                                <tr class="bg-white border-b text-[12px] hover:bg-gray-100">
+                                    <th scope="row" class="px-3 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                        {{ $loop->iteration }}
+                                    </th>
+                                    <td class="px-3 py-4 whitespace-nowrap">{{ $item->user->user_nama }}</td>
+                                    <td class="px-3 py-4 whitespace-nowrap">
+                                        @foreach($item->peminjamanDetail as $detail)
+                                            {{ $detail->buku->buku_judul ?? 'Tidak Diketahui' }}<br>
+                                        @endforeach
+                                    </td>
+                                    <td class="px-3 py-4 whitespace-nowrap">{{ $item->peminjaman_tglpinjam }}</td>
+                                    <td class="px-3 py-4 whitespace-nowrap">{{ $item->peminjaman_tglkembali }}</td>
+                                    <td class="px-3 py-4 whitespace-nowrap">
+                                        <span class="px-2 py-1 rounded-lg text-xs font-medium {{ $item->peminjaman_statuskembali ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700' }}">
+                                            {{ $item->peminjaman_statuskembali ? 'Selesai' : 'Dipinjam' }}
+                                        </span>
+                                    </td>
+                                    <td class="px-3 py-4 whitespace-nowrap">
+                                        Rp {{ number_format($item->peminjaman_denda, 0, ',', '.') }}
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
         </main>
         <footer class="py-4 bg-light mt-auto">

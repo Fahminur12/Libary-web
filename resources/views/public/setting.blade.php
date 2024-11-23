@@ -6,15 +6,13 @@
 
 @section('title', 'Halaman Pengaturan')
 
-@section('header')
-    @include('template.navbar_siswa')
-@endsection
-
 @section('main')
 <div id="layoutSidenav">
-    @include('template.sidebar_siswa')
-    <div id="layoutSidenav_content">
-        <main>
+    <aside class="w-64 bg-white border-r h-screen overflow-hidden flex-shrink-0">
+        @include('template.sidebar')
+    </aside>
+    <div id="layoutSidenav_content" class="flex-1 flex flex-col">
+        <main class="flex-1">
             <div class="container-fluid px-4">
                 <h1 class="mt-4">Pengaturan</h1>
                 <ol class="breadcrumb mb-4">
